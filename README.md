@@ -19,3 +19,15 @@ It is really nice to use in mobile Safari/Chrome on a handheld device, less usab
 
 Angular UI Bootstrap https://angular-ui.github.io/bootstrap/ has a datepicker which works ok, and also a timepicker.
 But the calendar-based datepicker has a completely different look and feel to the timepicker, and selecting dates several years in the past or future is a bit fiddly.
+
+## My datepicker
+
+My control will use simple set of `<input>` or `<select>` elements. Most of the configuration will be via a date format string. For example:
+
+```HTML
+<div my-datepicker format="ddMMMyyyy">
+```
+
+```HTML
+<div my-datepicker format="MM/yy">
+```
