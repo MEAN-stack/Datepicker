@@ -31,3 +31,5 @@ My control will use simple set of `<input>` or `<select>` elements. Most of the 
 ```HTML
 <div my-datepicker format="MM/yy">
 ```
+
+I'll use bootstrap's grid system to make the input elements stack on small screens. 
