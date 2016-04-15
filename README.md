@@ -177,79 +177,92 @@ The first bit declares that the directive has its own scope containing a Date ob
 
 ```HTML
           link: function(scope, element, attrs) {
-            /* initialize dateFormat to a default value */
+            // initialize dateFormat to a default value
             var dateFormat = 'ddMMyyyy'
             
-            /* if the HTML element specifying this directive has a `format` attribute then use it
+            // if the HTML element specifying this directive has a `format` attribute then use it
             if (attrs['format']) {
               dateFormat = attrs['format']
             }
+            // initialize the settings object
             scope.settings = {
               showDay: false,
               showMonth: false,
               showYear: false
             }
-            scope.settings.showDay = /dd/.test(scope.dateFormat)
-            scope.settings.showMonth = /MM/.test(scope.dateFormat)
-            scope.settings.showYear = /yy/.test(scope.dateFormat)
-			  
-              scope.months = []
-			  if (/MMMM/.test(scope.dateFormat)) {
-			    scope.months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']
-			  }
-			  else if (/MMM/.test(scope.dateFormat)) {
-			    scope.months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
-			  }
-			  else if (/MM/.test(scope.dateFormat)) {
-			    scope.months = ['01', '02', '03', '04', '05', '06', '07', '08', '09', '10', '11', '12']
-			  }
-		    }
-			parseDateFormat()
+            // parse the date format to figure out which elements to display
+            scope.settings.showDay = /dd/.test(dateFormat)
+            scope.settings.showMonth = /MM/.test(dateFormat)
+            scope.settings.showYear = /yy/.test(dateFormat)
 
-			scope.date = {
-			  day: scope.dt.getDate(),
-			  month: scope.months[scope.dt.getMonth()],
-			  year: scope.dt.getFullYear()
-			}
+            // create an array of values to populate the month selection control
+            scope.months = []
+            if (/MMMM/.test(scope.dateFormat)) {
+              scope.months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']
+            }
+            else if (/MMM/.test(scope.dateFormat)) {
+              scope.months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
+            }
+            else if (/MM/.test(scope.dateFormat)) {
+              scope.months = ['01', '02', '03', '04', '05', '06', '07', '08', '09', '10', '11', '12']
+            }
+            
+            // initialize the date object which contains the values from the datepicker elements
+            scope.date = {
+              day: scope.dt.getDate(),
+              month: scope.months[scope.dt.getMonth()],
+              year: scope.dt.getFullYear()
+            }
 
-	        //watchers
-			scope.$watch('date.day', function(newValue) {
-			  scope.dt.setDate(newValue)
-	          console.log('date dd: '+scope.dt.toString())
-	        });
-			scope.$watch('date.month', function(newValue) {
-			  for (var i=0; i<scope.months.length; i++) {
-			    if (newValue == scope.months[i]){
-				  scope.dt.setMonth(i)
-				}
-			  }
-	          console.log('date MM: '+scope.dt.toString())
-	        });
-			scope.$watch('date.year', function(newValue) {
-			  scope.dt.setFullYear(newValue)
-	          console.log('date yyyy: '+scope.dt.toString())
-	        });
-		  },
-		  template: function() {
-		    return angular.element(document.querySelector("#datepickerTemplate")).html()
-		  }
-		}
-	  })
+            // create the watchers which watch for changes in the values from the datepicker elements
+            // if a value changes then update the scope dt object
+	    scope.$watch('date.day', function(newValue) {
+              scope.dt.setDate(newValue)
+            });
+            
+            scope.$watch('date.month', function(newValue) {
+              for (var i=0; i<scope.months.length; i++) {
+                if (newValue == scope.months[i]){
+                  scope.dt.setMonth(i)
+                }
+              }
+            });
+            
+            scope.$watch('date.year', function(newValue) {
+              scope.dt.setFullYear(newValue)
+            });
+	  },
 ```
 
-This is the directive
+The link function does most of the work. I have included comments in the code to explain what it does
 
 ```HTML
-	  .controller("datepickerCtrl", function($scope) {
-		$scope.dateValue = new Date()
-	  })
-	</script>
+          template: function() {
+            return angular.element(document.querySelector("#datepickerTemplate")).html()
+          }
+        }
+      })
+```
+
+This last part of the directive specifies the template HTML
+
+```HTML
+      .controller("datepickerCtrl", function($scope) {
+        $scope.dateValue = new Date()
+      })
+    </script>
   </head>
+```
+The controller only has to initialize the `Date` object which is bound to the dt variable in the directive's scope 
+
+```HTML
   <body ng-controller="datepickerCtrl">
     <div my-datepicker format="ddMMMyyyy" value="dateValue" class="form-group" style="margin: 20px;"></div>
-	<div style="margin: 20px;">
-	  <span>{{dateValue.toDateString()}}</span>
-	</div>
+    <div style="margin: 20px;">
+      <span>{{dateValue.toDateString()}}</span>
+    </div>
   </body>
 </html>
 ```
+
+The HTML body specifies `datepickerCtrl` as its controller. It contains the datepicker and displays a string representation of the date.
