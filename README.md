@@ -59,7 +59,7 @@ I'm not sure yet how to implement this feature, but I think that I will try to u
 
 ## Step 1 - HTML and CSS
 
-As usual, I'm going to design and implement my control from the ground up, so I'll start with a piece of static HTML.
+As usual, I'm going to design and implement my control from the ground up, so I'll start with a piece of static HTML. This will be the basis of the template used in an Angular directive.
 I'm also going to make use of Bootstrap's CSS. It means that anyone using the final control will also need bootstrap, but then everyone uses bootstrap these days don't they?
 
 Here's the HTML:
@@ -109,7 +109,7 @@ It's actually a bit fiddly to remove the gap between the input elements while pr
 
 I have used `type="text"` for the two `<input>` elements. I tried `type="number"` but it gave me less control over the width of the element. Fortunately Angular will allow me to perform the validation on the user's input, so it's not a problem.
 
-Step 2 - Specifying the date format
+## Step 2 - Specifying the date format
 
 Since I am trying to keep things simple I will only support a few options here:
 
@@ -125,3 +125,5 @@ short name of a month e.g. Apr
 numeric month e.g. 04
 <pre>dd</pre>
 numeric day e.g. 28
+
+## Step 3 - Create the directive
