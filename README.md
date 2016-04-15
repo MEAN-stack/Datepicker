@@ -113,15 +113,15 @@ Step 2 - Specifying the date format
 
 Since I am trying to keep things simple I will only support a few options here:
 
-* <pre>yyyy</pre>
-** 4 digits year
-* <pre>yy</pre>
-** 2 digits year<
-* <pre>MMMM</pre>
-* full name of a month
-* <pre>MMM</pre>
-* short name of a month
-* <pre>MM</pre>
-* numeric month
-* <pre>dd</pre>
-* numeric day</pre>
+<pre>yyyy</pre>
+4 digits year e.g. 2015
+<pre>yy</pre>
+2 digits year e.g. 15
+<pre>MMMM</pre>
+full name of a month e.g. April
+<pre>MMM</pre>
+short name of a month e.g. Apr
+<pre>MM</pre>
+numeric month e.g. 04
+<pre>dd</pre>
+numeric day e.g. 28
