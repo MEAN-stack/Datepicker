@@ -36,4 +36,18 @@ My control will use simple set of `<input>` or `<select>` elements. Most of the 
 
 ![Screenshot](https://github.com/MEAN-stack/Datepicker/blob/master/date2.png)
 
-## <pre>&lt;input&gt;&nbsp;or&nbsp;&lt;select&gt;</pre>
+## &lt;input&gt;&nbsp;or&nbsp;&lt;select&gt;
+
+It seems reasonable to use a `<select>` element to choose the month from a list of 12 options, but what about the day of the month? or the year.
+Then again, in some configurations the range of dates may be restricted, so choosing a year in the range 2016 .. 2024 might be fine in a list, but 1900 .. 2099 would not.
+
+For my first stab at this, I'm going to implement the following behaviours:
+
+* Day selection always `<input>`
+* Month selection always `<select>`
+* Year selection uses `<select>` if the range is 12 years or less, otherwise uses `<input>`
+
+
+## Quick Dates
+
+This is another feature I have seen on some websites which I quite like:
