@@ -130,7 +130,7 @@ numeric day e.g. 28
 
 This is my first crack at the datepicker directive. Not everything is working yet.
 
-You can see a demo here:
+You can see a demo here: http://mean-stack.github.io/datepicker/datepicker1.html
 
 I'll give the complete HTML below, with some comments:
 
