@@ -159,30 +159,39 @@ The `datepicker` class sharpens the boxes and makes the datepicker more compact
     </script>
 ```
 
-This is the html template for the datepicker directive. It refers to some objects defined in the directive's scope: `settings` and `date`
+This is the html template for the datepicker directive. It refers to some objects defined in the directive's scope: `settings` and `date`.
+Remember that there is no space between the day, month, and year elements.
 
 ```HTML
     <script>
       angular.module("datepickerApp", [])
-	  .directive("myDatepicker", function() {
-	    return {
+      .directive("myDatepicker", function() {
+        return {
           scope: {
             dt: "=value"	  
-	      },
-		  link: function(scope, element, attrs) {
-		    if (attrs['format']) {
-			  scope.dateFormat = attrs['format']
-			}
-            var parseDateFormat = function() {
-		      console.log('dateFormat: '+scope.dateFormat)
-			  scope.settings = {
-		        showDay: false,
-		        showMonth: false,
-		        showYear: false
-		      }
-              scope.settings.showDay = /dd/.test(scope.dateFormat)
-              scope.settings.showMonth = /MM/.test(scope.dateFormat)
-              scope.settings.showYear = /yy/.test(scope.dateFormat)
+          },
+```
+
+This is the directive. There is quite a lot of code so I'll describe it in small pieces.
+The first bit declares that the directive has its own scope containing a Date object named `dt` which is bound to an attribute named `value`
+
+```HTML
+          link: function(scope, element, attrs) {
+            /* initialize dateFormat to a default value */
+            var dateFormat = 'ddMMyyyy'
+            
+            /* if the HTML element specifying this directive has a `format` attribute then use it
+            if (attrs['format']) {
+              dateFormat = attrs['format']
+            }
+            scope.settings = {
+              showDay: false,
+              showMonth: false,
+              showYear: false
+            }
+            scope.settings.showDay = /dd/.test(scope.dateFormat)
+            scope.settings.showMonth = /MM/.test(scope.dateFormat)
+            scope.settings.showYear = /yy/.test(scope.dateFormat)
 			  
               scope.months = []
 			  if (/MMMM/.test(scope.dateFormat)) {
@@ -226,6 +235,11 @@ This is the html template for the datepicker directive. It refers to some object
 		  }
 		}
 	  })
+```
+
+This is the directive
+
+```HTML
 	  .controller("datepickerCtrl", function($scope) {
 		$scope.dateValue = new Date()
 	  })
