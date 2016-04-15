@@ -139,19 +139,30 @@ I'll give the complete HTML below, with some comments:
   <head>
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.9/angular.js"></script>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.css">
-	<style>
-   	.datepicker {
-	  border-radius:0;
-	  width: auto;
-	  display: inline-block;
-	}
-	</style>
-	<script type="text/template" id="datepickerTemplate">
-	  <input ng-if="settings.showDay" ng-model="date.day" class="form-control datepicker" type="text" size="2" maxlength="2"
-	 ><select ng-if="settings.showMonth" ng-model="date.month" class="form-control datepicker" name="month" ng-options="month as month for month in months"></select
+    <style>
+      .datepicker {
+        border-radius:0;
+        width: auto;
+        display: inline-block;
+      }
+    </style>
+```
+
+We start by including Angular and Bootstrap
+The `datepicker` class sharpens the boxes and makes the datepicker more compact
+
+```HTML
+    <script type="text/template" id="datepickerTemplate">
+      <input ng-if="settings.showDay" ng-model="date.day" class="form-control datepicker" type="text" size="2" maxlength="2"
+     ><select ng-if="settings.showMonth" ng-model="date.month" class="form-control datepicker" name="month" ng-options="month as month for month in months"></select
      ><input ng-if="settings.showYear" ng-model="date.year" class="form-control datepicker" type="text" name="year" size="4" maxlength="4">
     </script>
-	<script>
+```
+
+This is the html template for the datepicker directive. It refers to some objects defined in the directive's scope: `settings` and `date`
+
+```HTML
+    <script>
       angular.module("datepickerApp", [])
 	  .directive("myDatepicker", function() {
 	    return {
