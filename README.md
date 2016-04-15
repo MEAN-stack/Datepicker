@@ -100,3 +100,9 @@ Here's the HTML:
   </body>
 </html>
 ```
+
+![Screenshot](https://github.com/MEAN-stack/Datepicker/blob/master/date4.png)
+
+You can see that the input elements have no space between them. This is deliberate; I think it makes the datepicker look neater, at least it does if I sharpen the corners of the elements as I have done here.
+
+It's actually a bit fiddly to remove the gap between the input elements while preserving the indentation in the HTML, keeping the source code neat and readable. I have achieved this by moving the closing &gt; angle bracket to the next line, but there are several other ways to achieve the same effect described here https://css-tricks.com/fighting-the-space-between-inline-block-elements/ 
