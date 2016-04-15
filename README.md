@@ -36,7 +36,7 @@ My control will use simple set of `<input>` or `<select>` elements. Most of the 
 
 ![Screenshot](https://github.com/MEAN-stack/Datepicker/blob/master/date2.png)
 
-## &lt;input&gt;&nbsp;or&nbsp;&lt;select&gt;
+## &lt;input&gt;&nbsp;or&nbsp;&lt;select&gt; ?
 
 It seems reasonable to use a `<select>` element to choose the month from a list of 12 options, but what about the day of the month? or the year.
 Then again, in some configurations the range of dates may be restricted, so choosing a year in the range 2016 .. 2024 might be fine in a list, but 1900 .. 2099 would not.
@@ -127,3 +127,104 @@ numeric month e.g. 04
 numeric day e.g. 28
 
 ## Step 3 - Create the directive
+
+This is my first crack at the datepicker directive. Not everything is working yet.
+
+You can see a demo here:
+
+I'll give the complete HTML below, with some comments:
+
+```HTML
+<html ng-app="datepickerApp">
+  <head>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.9/angular.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.css">
+	<style>
+   	.datepicker {
+	  border-radius:0;
+	  width: auto;
+	  display: inline-block;
+	}
+	</style>
+	<script type="text/template" id="datepickerTemplate">
+	  <input ng-if="settings.showDay" ng-model="date.day" class="form-control datepicker" type="text" size="2" maxlength="2"
+	 ><select ng-if="settings.showMonth" ng-model="date.month" class="form-control datepicker" name="month" ng-options="month as month for month in months"></select
+     ><input ng-if="settings.showYear" ng-model="date.year" class="form-control datepicker" type="text" name="year" size="4" maxlength="4">
+    </script>
+	<script>
+      angular.module("datepickerApp", [])
+	  .directive("myDatepicker", function() {
+	    return {
+          scope: {
+            dt: "=value"	  
+	      },
+		  link: function(scope, element, attrs) {
+		    if (attrs['format']) {
+			  scope.dateFormat = attrs['format']
+			}
+            var parseDateFormat = function() {
+		      console.log('dateFormat: '+scope.dateFormat)
+			  scope.settings = {
+		        showDay: false,
+		        showMonth: false,
+		        showYear: false
+		      }
+              scope.settings.showDay = /dd/.test(scope.dateFormat)
+              scope.settings.showMonth = /MM/.test(scope.dateFormat)
+              scope.settings.showYear = /yy/.test(scope.dateFormat)
+			  
+              scope.months = []
+			  if (/MMMM/.test(scope.dateFormat)) {
+			    scope.months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']
+			  }
+			  else if (/MMM/.test(scope.dateFormat)) {
+			    scope.months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
+			  }
+			  else if (/MM/.test(scope.dateFormat)) {
+			    scope.months = ['01', '02', '03', '04', '05', '06', '07', '08', '09', '10', '11', '12']
+			  }
+		    }
+			parseDateFormat()
+
+			scope.date = {
+			  day: scope.dt.getDate(),
+			  month: scope.months[scope.dt.getMonth()],
+			  year: scope.dt.getFullYear()
+			}
+
+	        //watchers
+			scope.$watch('date.day', function(newValue) {
+			  scope.dt.setDate(newValue)
+	          console.log('date dd: '+scope.dt.toString())
+	        });
+			scope.$watch('date.month', function(newValue) {
+			  for (var i=0; i<scope.months.length; i++) {
+			    if (newValue == scope.months[i]){
+				  scope.dt.setMonth(i)
+				}
+			  }
+	          console.log('date MM: '+scope.dt.toString())
+	        });
+			scope.$watch('date.year', function(newValue) {
+			  scope.dt.setFullYear(newValue)
+	          console.log('date yyyy: '+scope.dt.toString())
+	        });
+		  },
+		  template: function() {
+		    return angular.element(document.querySelector("#datepickerTemplate")).html()
+		  }
+		}
+	  })
+	  .controller("datepickerCtrl", function($scope) {
+		$scope.dateValue = new Date()
+	  })
+	</script>
+  </head>
+  <body ng-controller="datepickerCtrl">
+    <div my-datepicker format="ddMMMyyyy" value="dateValue" class="form-group" style="margin: 20px;"></div>
+	<div style="margin: 20px;">
+	  <span>{{dateValue.toDateString()}}</span>
+	</div>
+  </body>
+</html>
+```
