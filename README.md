@@ -57,7 +57,7 @@ This is a nice feature I have seen on some websites:
 The list of quick dates is _ad hoc_ but bound to the other controls, so that choosing a date from the list will update the contents of the datepicker elements.
 I'm not sure yet how to implement this feature, but I think that I will try to use Angular's transclusion feature.
 
-## Step 1 HTML and CSS
+## Step 1 - HTML and CSS
 
 As usual, I'm going to design and implement my control from the ground up, so I'll start with a piece of static HTML.
 I'm also going to make use of Bootstrap's CSS. It means that anyone using the final control will also need bootstrap, but then everyone uses bootstrap these days don't they?
@@ -108,3 +108,14 @@ You can see that the input elements have no space between them. This is delibera
 It's actually a bit fiddly to remove the gap between the input elements while preserving the indentation in the HTML, keeping the source code neat and readable. I have achieved this by moving the closing &gt; angle bracket to the next line, but there are several other ways to achieve the same effect described here https://css-tricks.com/fighting-the-space-between-inline-block-elements/ 
 
 I have used `type="text"` for the two `<input>` elements. I tried `type="number"` but it gave me less control over the width of the element. Fortunately Angular will allow me to perform the validation on the user's input, so it's not a problem.
+
+Step 2 - Specifying the date format
+
+Since I am trying to keep things simple I will only support a few options here:
+
+* yyyy 4 digits year
+* yy 2 digits year
+* MMMM full name of a month
+* MMM short name of a month
+* MM numeric month
+* dd numeric day
