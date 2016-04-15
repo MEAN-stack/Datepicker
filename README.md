@@ -36,4 +36,4 @@ My control will use simple set of `<input>` or `<select>` elements. Most of the 
 
 ![Screenshot](https://github.com/MEAN-stack/Datepicker/blob/master/date2.png)
 
-## <pre>&lt;input&gt;</pre>&nbsp;or&nbsp;<pre>&lt;select&gt;</pre>
+## <pre>&lt;input&gt;&nbsp;or&nbsp;&lt;select&gt;</pre>
