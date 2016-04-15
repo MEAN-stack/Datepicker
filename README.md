@@ -55,4 +55,51 @@ This is a nice feature I have seen on some websites:
 ![Screenshot](https://github.com/MEAN-stack/Datepicker/blob/master/date3.png)
 
 The list of quick dates is _ad hoc_ but bound to the other controls, so that choosing a date from the list will update the contents of the datepicker elements.
-I'm not sure yet how to implement this feature, but I think that I will try to use Angular's transclusion feature. 
+I'm not sure yet how to implement this feature, but I think that I will try to use Angular's transclusion feature.
+
+## Step 1 HTML and CSS
+
+As usual, I'm going to design and implement my control from the ground up, so I'll start with a piece of static HTML.
+I'm also going to make use of Bootstrap's CSS. It means that anyone using the final control will also need bootstrap, but then everyone uses bootstrap these days don't they?
+
+Here's the HTML:
+
+```HTML
+<!DOCTYPE html>
+<html>
+  <head>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.css">
+	<style>
+   	.datepicker {
+	  border-radius:0;
+	  width: auto;
+	  display: inline-block;
+	  vertical-align: top;
+	}
+	</style>
+  </head>
+  <body>
+  <form class="form-inline">
+    <div class="form-group" style="margin: 20px;">
+      <input class="form-control datepicker" type="text" size="2" maxlength="2" value="8"
+     ><select class="form-control datepicker" name="month">
+        <option value="0">month</option>
+        <option value="1">Jan</option>
+        <option value="2">Feb</option>
+        <option value="3">Mar</option>
+        <option value="4">Apr</option>
+        <option value="5">May</option>
+        <option value="6">Jun</option>
+        <option value="7">Jul</option>
+        <option value="8">Aug</option>
+        <option value="9">Sep</option>
+        <option value="10">Oct</option>
+        <option value="11">Nov</option>
+        <option value="12" selected="">Dec</option>
+      </select
+	 ><input class="form-control datepicker" type="text" name="year" size="4" maxlength="4" value="2015"
+    </div>
+  </form>
+  </body>
+</html>
+```
