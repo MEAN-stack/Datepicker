@@ -28,8 +28,12 @@ My control will use simple set of `<input>` or `<select>` elements. Most of the 
 <div my-datepicker format="ddMMMyyyy">
 ```
 
+![Screenshot](https://github.com/MEAN-stack/Datepicker/blob/master/date1.png)
+
 ```HTML
 <div my-datepicker format="MM/yy">
 ```
+
+![Screenshot](https://github.com/MEAN-stack/Datepicker/blob/master/date2.png)
 
 I'll use bootstrap's grid system to make the input elements stack on small screens. 
