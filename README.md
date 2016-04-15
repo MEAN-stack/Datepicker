@@ -69,17 +69,15 @@ Here's the HTML:
 <html>
   <head>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.css">
-	<style>
-   	.datepicker {
-	  border-radius:0;
-	  width: auto;
-	  display: inline-block;
-	  vertical-align: top;
-	}
-	</style>
+    <style>
+      .datepicker {
+        border-radius:0;
+        width: auto;
+        display: inline-block;
+      }
+    </style>
   </head>
   <body>
-  <form class="form-inline">
     <div class="form-group" style="margin: 20px;">
       <input class="form-control datepicker" type="text" size="2" maxlength="2" value="8"
      ><select class="form-control datepicker" name="month">
@@ -97,9 +95,8 @@ Here's the HTML:
         <option value="11">Nov</option>
         <option value="12" selected="">Dec</option>
       </select
-	 ><input class="form-control datepicker" type="text" name="year" size="4" maxlength="4" value="2015"
+     ><input class="form-control datepicker" type="text" name="year" size="4" maxlength="4" value="2015"
     </div>
-  </form>
   </body>
 </html>
 ```
