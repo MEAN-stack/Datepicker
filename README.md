@@ -50,4 +50,9 @@ For my first stab at this, I'm going to implement the following behaviours:
 
 ## Quick Dates
 
-This is another feature I have seen on some websites which I quite like:
+This is a nice feature I have seen on some websites:
+
+![Screenshot](https://github.com/MEAN-stack/Datepicker/blob/master/date3.png)
+
+The list of quick dates is _ad hoc_ but bound to the other controls, so that choosing a date from the list will update the contents of the datepicker elements.
+I'm not sure yet how to implement this feature, but I think that I will try to use Angular's transclusion feature. 
