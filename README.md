@@ -362,3 +362,9 @@ Finally, I added a button to allow the user to increase the date.
 Mostly it all works as expected, but for some reason if I use one the datepicker input elements to change the day (or month or year) the other datepicker doesn't change. The data values do change for each datepicker, but the views don't update :(
 
 At first I thought this was just a bug, or a minor problem which could be fixed by calling `scope.$apply()` in the watch function. Now I'm not so sure. I think I will have to refactor the code to use a second `myDatepickerInputElement` directive, and requiring this directive in the `myDatepicker` directive. 
+
+I'll come back to this later...
+
+## Step 5 - Quick dates
+
+I'm going to implement quick dates outside the directive using a simple controller behaviour.
