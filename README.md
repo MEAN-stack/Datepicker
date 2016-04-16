@@ -266,3 +266,95 @@ The controller only has to initialize the `Date` object which is bound to the dt
 ```
 
 The HTML body specifies `datepickerCtrl` as its controller. It contains the datepicker and displays a string representation of the date.
+
+## Step - Two way binding
+
+I want to demonstrate the two-way binding between the `dateValue` variable in the controller's scope and the `dt` variable in the directive's scope.
+I will create two datepickers which represent the month in different formats, but share the same date, and I'll add a button and a controller behaviour to increment the date by one day.
+
+I am expecting to see the following functionality in the app:
+* Changing the date in either datepicker will update the string representation of the date
+* Clicking the button will add one day to the date and update both controls 
+* Both datepicker's stay in sync with each other
+
+You can see a demo here: http://mean-stack.github.io/datepicker/datepicker2.html
+
+Here are the changes I made:
+
+```HTML
+...
+  var updateElements = function(dateVal) {
+    scope.date.day = dateVal.getDate()
+    scope.date.month = scope.months[dateVal.getMonth()]
+    scope.date.year = dateVal.getFullYear()
+  }
+
+  scope.date = {
+    day: scope.dt.getDate(),
+    month: scope.months[scope.dt.getMonth()],
+    year: scope.dt.getFullYear()
+  }
+
+  //watchers
+  scope.$watch('date.day', function(newValue) {
+    console.log('day changed to '+newValue)
+    scope.dt.setDate(newValue)
+    updateElements(scope.dt)
+  });
+
+  scope.$watch('date.month', function(newValue) {
+    console.log('month changed to '+newValue)
+    for (var i=0; i<scope.months.length; i++) {
+      if (newValue == scope.months[i]){
+        scope.dt.setMonth(i)
+      }
+   }
+   updateElements(scope.dt)
+ })
+
+scope.$watch('date.year', function(newValue) {
+  console.log('year changed to '+newValue)
+  scope.dt.setFullYear(newValue)
+  updateElements(scope.dt)
+})
+			
+scope.$watch('dt', function(newValue) {
+  console.log('dt changed to '+newValue.toDateString())
+  updateElements(newValue)
+})
+...
+```
+
+I have added a function to watch for changes to `dt` on the directive's scope (for example, when the user clicks the button to add a day to the date). In the watcher I call the `updateElements` function to update the values of the datepicker elements which represent the day, month, and year.
+
+```HTML
+...
+  .controller("datepickerCtrl", function($scope, $interval) {
+    $scope.dateValue = new Date()
+
+    $scope.incDate = function() {
+      var t = $scope.dateValue.getTime()
+      t += 24*60*60*1000
+      $scope.dateValue = new Date(t)
+    }
+  })
+```
+
+In the controller I have added a behaviour - a function which will be called when the button is clicked to add one day to the date
+
+```HTML
+...
+  <body ng-controller="datepickerCtrl">
+    <div my-datepicker format="ddMMMyyyy" value="dateValue" class="form-group" style="margin: 20px;"></div>
+    <div my-datepicker format="ddMMyy" value="dateValue" class="form-group" style="margin: 20px;"></div>
+	<div style="margin: 20px;">
+	  <span>{{dateValue.toDateString()}}</span>
+	</div>
+    <button class="btn" ng-click="incDate()" style="margin-left: 20px">Date++</button>
+  </body>
+</html>
+```
+
+In the HTML I have added a second datepicker, this one with a numeric representation of the month.
+Both datepickers are bound to the same dateValue
+Finally, I added a button to allow the user to increase the date.
