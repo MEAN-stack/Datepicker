@@ -267,7 +267,7 @@ The controller only has to initialize the `Date` object which is bound to the dt
 
 The HTML body specifies `datepickerCtrl` as its controller. It contains the datepicker and displays a string representation of the date.
 
-## Step - Two way binding
+## Step 4 - Two-way binding
 
 I want to demonstrate the two-way binding between the `dateValue` variable in the controller's scope and the `dt` variable in the directive's scope.
 I will create two datepickers which represent the month in different formats, but share the same date, and I'll add a button and a controller behaviour to increment the date by one day.
