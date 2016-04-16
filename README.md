@@ -275,7 +275,7 @@ I will create two datepickers which represent the month in different formats, bu
 I am expecting to see the following functionality in the app:
 * Changing the date in either datepicker will update the string representation of the date
 * Clicking the button will add one day to the date and update both controls 
-* Both datepicker's stay in sync with each other
+* Both datepickers stay in sync with each other
 
 You can see a demo here: http://mean-stack.github.io/datepicker/datepicker2.html
 
@@ -358,3 +358,5 @@ In the controller I have added a behaviour - a function which will be called whe
 In the HTML I have added a second datepicker, this one with a numeric representation of the month.
 Both datepickers are bound to the same dateValue
 Finally, I added a button to allow the user to increase the date.
+
+Mostly it all works as expected, but for some reason if I use one the datepicker input elements to change the day (or month or year) the other datepicker doesn't change. 
