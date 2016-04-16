@@ -411,7 +411,7 @@ This works really well but it doesn't look very good. I want the new `select` el
 
 In AngularJS transclusion means inserting one part of an HTML document into another by reference. In the context of directives it means allowing a directive to wrap arbitrary HTML content. In our case the `myDatepicker` directive will wrap the quick dates `select` element.
 
-You can see a demo here:
+You can see a demo here: http://mean-stack.github.io/datepicker/datepicker4.html
 
 This is how the HTML looks:
 
@@ -430,4 +430,48 @@ This is how the HTML looks:
 ...
 ```
 
-All I have done is to move the `select` element inside the datepicker. I also had to make a change to the definition of `quickDateValue` in the scope. It's not generally good practice to define `ng-model` values directly on the scope, due to problems which arise due to JavaScript's prototypal inheritance. Basically, the rule is: "If you are using `ng-model` then you have to have a dot in there somewhere".
+All I have done is to move the `select` element inside the datepicker. I also had to make a change to the definition of `quickDateValue` in the scope. It's not generally good practice to define `ng-model` values directly on the scope, due to problems which arise due to JavaScript's prototypal inheritance. Basically, the rule is: <b>If you are using `ng-model` then you have to have a dot in there somewhere".</b>
+
+Here's the controller:
+
+```JavaScript
+  .controller("datepickerCtrl", function($scope) {
+    $scope.dateValue = new Date()
+
+    $scope.quickDates = [
+      {date: new Date(0), description: 'epoch'},
+      {date: new Date(), description: 'today'},
+      {date: new Date("October 13, 2014 11:13:00"), description: 'October 13, 2014'}
+    ]
+        
+    $scope.extra = {
+      quickDateValue: null
+    }
+        
+    $scope.change = function() {
+      if ($scope.extra.quickDateValue && $scope.extra.quickDateValue.date) {
+        $scope.dateValue = $scope.extra.quickDateValue.date
+      }
+    }
+  })
+```
+
+There are two simple changes to the directive which make transclusion happen:
+
+The first is to add this line to the object returned by the directive's factory function:
+```JavaScript
+transclude: true
+```
+
+The second is to specify where in the directive's template the transclusion should occur:
+
+```HTML
+  <script type="text/template" id="datepickerTemplate">
+    <input ng-if="settings.showDay" ng-model="date.day" class="form-control datepicker" type="text" size="2" maxlength="2"
+   ><select ng-if="settings.showMonth" ng-model="date.month" class="form-control datepicker" name="month" ng-options="month as month for month in months"></select
+   ><input ng-if="settings.showYear" ng-model="date.year" class="form-control datepicker" type="text" name="year" size="4" maxlength="4"
+   ><span ng-transclude style="position: relative; left:-4px;"></span>
+ </script>
+```
+
+You can see that I added a `span` element at the end of the template to wrap the transcluded content. I tried to make sure that there would be no space between the elements but Angular's compiler adds some space, so I styled the element to compensate.
