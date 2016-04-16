@@ -374,6 +374,8 @@ You can see a demo here: http://mean-stack.github.io/datepicker/datepicker3.html
 There are no changes to the directive. Here are the changes to the controller and the HTML:
 
 ```HTML
+  <script>
+  ...
   .controller("datepickerCtrl", function($scope) {
     $scope.dateValue = new Date()
 
