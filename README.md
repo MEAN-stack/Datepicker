@@ -367,4 +367,42 @@ I'll come back to this later...
 
 ## Step 5 - Quick dates
 
-I'm going to implement quick dates outside the directive using a simple controller behaviour.
+First, I'm going to implement quick dates outside the directive using a simple controller behaviour.
+
+You can see a demo here: http://mean-stack.github.io/datepicker/datepicker3.html
+
+There are no changes to the directive. Here are the changes to the controller and the HTML:
+
+```HTML
+  .controller("datepickerCtrl", function($scope) {
+    $scope.dateValue = new Date()
+
+    $scope.quickDates = [
+      {date: new Date(0), description: 'epoch'},
+      {date: new Date(), description: 'today'},
+      {date: new Date("October 13, 2014 11:13:00"), description: 'October 13, 2014'}
+    ]
+
+    $scope.change = function() {
+      if ($scope.quickDateValue && $scope.quickDateValue.date) {
+        $scope.dateValue = $scope.quickDateValue.date
+      }
+    }
+  })
+  </script>
+  </head>
+  <body ng-controller="datepickerCtrl">
+    <div my-datepicker format="ddMMMyyyy" value="dateValue" class="form-group" style="margin: 20px;"></div>
+    <select ng-model="quickDateValue" ng-change="change()" class="form-control datepicker" ng-options="date.description for date in quickDates" style="margin: 20px;">
+      <option value="">Quick Dates</option>
+    </select>
+ 	<div style="margin: 20px;">
+	  <span><strong>Selected date:</strong> {{dateValue.toDateString()}}</span>
+	</div>
+  </body>
+</html>
+```
+
+This works really well but it doesn't look very good. I want the new `select` element to be adjacent to the other datepicker elements. I can think of a couple of ways to achieve this. I'll demonstrate both ways in the following two sections.
+
+## Step 6 - Transclusion
