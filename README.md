@@ -408,3 +408,5 @@ There are no changes to the directive. Here are the changes to the controller an
 This works really well but it doesn't look very good. I want the new `select` element to be adjacent to the other datepicker elements. I can think of a couple of ways to achieve this. I'll demonstrate both ways in the following two sections.
 
 ## Step 6 - Transclusion
+
+In AngularJS transclusion means inserting one part of an HTML document into another by reference. In the context of directives it means allowing a directive to wrap arbitrary HTML content. In our case the `myDatepicker` directive will wrap the quick dates `select` element  
