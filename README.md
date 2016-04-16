@@ -409,4 +409,25 @@ This works really well but it doesn't look very good. I want the new `select` el
 
 ## Step 6 - Transclusion
 
-In AngularJS transclusion means inserting one part of an HTML document into another by reference. In the context of directives it means allowing a directive to wrap arbitrary HTML content. In our case the `myDatepicker` directive will wrap the quick dates `select` element  
+In AngularJS transclusion means inserting one part of an HTML document into another by reference. In the context of directives it means allowing a directive to wrap arbitrary HTML content. In our case the `myDatepicker` directive will wrap the quick dates `select` element.
+
+You can see a demo here:
+
+This is how the HTML looks:
+
+```HTML
+...
+  <body ng-controller="datepickerCtrl">
+    <div my-datepicker format="ddMMMyyyy" value="dateValue" class="form-group" style="margin: 20px;">
+      <select ng-model="extra.quickDateValue" ng-change="change()" class="form-control datepicker" ng-options="date.description for date in quickDates">
+        <option value="">Quick Dates</option>
+      </select>
+    </div>
+    <div style="margin: 20px;">
+	  <span><strong>Selected date:</strong> {{dateValue.toDateString()}}</span>
+	</div>
+  </body>
+...
+```
+
+All I have done is to move the `select` element inside the datepicker. I also had to make a change to the definition of `quickDateValue` in the scope. It's not generally good practice to define `ng-model` values directly on the scope, due to problems which arise due to JavaScript's prototypal inheritance. Basically, the rule is: "If you are using `ng-model` then you have to have a dot in there somewhere".
