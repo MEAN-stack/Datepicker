@@ -649,62 +649,62 @@ And here's the code:
   <head>
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.9/angular.js"></script>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.css">
-	<style>
-   	.datepicker {
-	  border-radius:0;
-	  width: auto;
-	  display: inline-block;
-	}
-	</style>
-	<script type="text/template" id="datepickerTemplate">
-	  <input ng-if="settings.showDay" ng-model="date.day" class="form-control datepicker" type="text" size="2" maxlength="2"
-	 ><select ng-if="settings.showMonth" ng-model="date.month" class="form-control datepicker" name="month" ng-options="month as month for month in months"></select
+    <style>
+      .datepicker {
+        border-radius:0;
+        width: auto;
+        display: inline-block;
+      }
+    </style>
+    <script type="text/template" id="datepickerTemplate">
+      <input ng-if="settings.showDay" ng-model="date.day" class="form-control datepicker" type="text" size="2" maxlength="2"
+     ><select ng-if="settings.showMonth" ng-model="date.month" class="form-control datepicker" name="month" ng-options="month as month for month in months"></select
      ><input ng-if="settings.showYear" ng-model="date.year" class="form-control datepicker" type="text" name="year" size="4" maxlength="4"
      ><select ng-if="settings.showQuickDates" ng-model="date.quickDateValue" ng-change="change()" class="form-control datepicker" ng-options="date.description for date in quickDates">
         <option value="">Quick Dates</option>
       </select>
     </script>
-	<script>
+    <script>
       angular.module("datepickerApp", [])
-	  .directive("myDatepicker", function() {
-	    return {
+      .directive("myDatepicker", function() {
+        return {
           scope: {
             dt: "=value",
             quickDates: "=quickDates"            
-	      },
-		  link: function(scope, element, attrs) {
-		    var dateFormat = 'ddMMyyyy'
-		    if (attrs['format']) {
-			  dateFormat = attrs['format']
-			}
-			scope.settings = {
-		      showDay: false,
-		      showMonth: false,
-		      showYear: false,
+          },
+          link: function(scope, element, attrs) {
+            var dateFormat = 'ddMMyyyy'
+            if (attrs['format']) {
+              dateFormat = attrs['format']
+            }
+            scope.settings = {
+              showDay: false,
+              showMonth: false,
+              showYear: false,
               showQuickDates: false
-		    }
+            }
             scope.settings.showDay = /dd/.test(dateFormat)
             scope.settings.showMonth = /MM/.test(dateFormat)
             scope.settings.showYear = /yy/.test(dateFormat)
             if (scope.quickDates) {
               scope.settings.showQuickDates = true
             }
-			  
+		  
             scope.months = []
-			if (/MMMM/.test(dateFormat)) {
-			 scope.months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']
-			}
-			else if (/MMM/.test(dateFormat)) {
-			  scope.months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
-			}
-			else if (/MM/.test(dateFormat)) {
-			  scope.months = ['01', '02', '03', '04', '05', '06', '07', '08', '09', '10', '11', '12']
-			}
+            if (/MMMM/.test(dateFormat)) {
+              scope.months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']
+            }
+            else if (/MMM/.test(dateFormat)) {
+              scope.months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
+            }
+            else if (/MM/.test(dateFormat)) {
+              scope.months = ['01', '02', '03', '04', '05', '06', '07', '08', '09', '10', '11', '12']
+            }
 
-			var updateElements = function(dateVal) {
-		      scope.date.day = new Date(dateVal).getDate()
-		      scope.date.month = scope.months[new Date(dateVal).getMonth()]
-		      scope.date.year = new Date(dateVal).getFullYear()
+            var updateElements = function(dateVal) {
+              scope.date.day = new Date(dateVal).getDate()
+              scope.date.month = scope.months[new Date(dateVal).getMonth()]
+              scope.date.year = new Date(dateVal).getFullYear()
             }
 			
             // Reset the quick dates selection to "Quick Dates" if the date has been changed via one of the other controls  
@@ -716,46 +716,46 @@ And here's the code:
               }
             }
             
-			scope.date = {
-			  day: new Date(scope.dt).getDate(),
-			  month: scope.months[new Date(scope.dt).getMonth()],
-			  year: new Date(scope.dt).getFullYear(),
+            scope.date = {
+              day: new Date(scope.dt).getDate(),
+              month: scope.months[new Date(scope.dt).getMonth()],
+              year: new Date(scope.dt).getFullYear(),
               quickDateValue: null
-			}
+            }
 
-	        //watchers
-			scope.$watch('date.day', function(newValue) {
+            //watchers
+            scope.$watch('date.day', function(newValue) {
               var d = new Date(scope.dt)
-			  d.setDate(newValue)
+              d.setDate(newValue)
               scope.dt = d.getTime()
-			  updateElements(scope.dt)
+              updateElements(scope.dt)
               refreshQuickDates()
-	        });
+            });
 
-			scope.$watch('date.month', function(newValue) {
-  			  for (var i=0; i<scope.months.length; i++) {
-			    if (newValue == scope.months[i]){
+            scope.$watch('date.month', function(newValue) {
+              for (var i=0; i<scope.months.length; i++) {
+                if (newValue == scope.months[i]) {
                   var d = new Date(scope.dt)
-				  d.setMonth(i)
+                  d.setMonth(i)
                   scope.dt = d.getTime()
-				}
-			  }
-			  updateElements(scope.dt)
+                }
+              }
+              updateElements(scope.dt)
               refreshQuickDates()
-	        })
+            })
 
-			scope.$watch('date.year', function(newValue) {
+            scope.$watch('date.year', function(newValue) {
               var d = new Date(scope.dt)
               d.setFullYear(newValue)
               scope.dt = d.getTime()
-			  updateElements(scope.dt)
+              updateElements(scope.dt)
               refreshQuickDates()
-	        })
-			
-			scope.$watch('dt', function(newValue) {
-			  updateElements(newValue)
+            })
+
+            scope.$watch('dt', function(newValue) {
+              updateElements(newValue)
               refreshQuickDates()
-			})
+            })
 
             scope.change = function() {
               if (scope.date.quickDateValue) {
@@ -764,13 +764,13 @@ And here's the code:
               }
             }
           },
-		  template: function() {
-		    return angular.element(document.querySelector("#datepickerTemplate")).html()
-		  }
+          template: function() {
+            return angular.element(document.querySelector("#datepickerTemplate")).html()
+          }
         }
-	  })
-	  .controller("datepickerCtrl", function($scope) {
-		$scope.dateValue = new Date().getTime()
+      })
+      .controller("datepickerCtrl", function($scope) {
+        $scope.dateValue = new Date().getTime()
 
         $scope.incDate = function() {
           $scope.dateValue += 24*60*60*1000
@@ -785,15 +785,15 @@ And here's the code:
           {date: new Date().getTime(), description: 'today'},
           {date: new Date("October 13, 2014 11:13:00").getTime(), description: 'October 13, 2014'}
         ]
-	  })
-	</script>
+      })
+    </script>
   </head>
   <body ng-controller="datepickerCtrl">
     <div my-datepicker format="ddMMMyyyy" quick-dates="quickDates" value="dateValue" class="form-group" style="margin: 20px;"></div>
     <div my-datepicker format="ddMMyy" value="dateValue" class="form-group" style="margin: 20px;"></div>
     <div style="margin: 20px;">
-	  <span><strong>Selected date:</strong> {{dateString()}}</span>
-	</div>
+      <span><strong>Selected date:</strong> {{dateString()}}</span>
+    </div>
     <button class="btn" ng-click="incDate()" style="margin-left: 20px">Date++</button>
   </body>
 </html>
