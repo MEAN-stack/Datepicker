@@ -625,7 +625,7 @@ and the complete HTML is here:
 </html>
 ```
 
-Step 7 - Two-way binding revisited
+## Step 8 - Two-way binding revisited
 
 Now that my datepicker is working well, I want to revisit the problem I described at the end of Step 4.
 I think the issue is that Angular's digest loop is not picking up changes to the date represented by date object. It will only notice when the actual object changes.
