@@ -365,6 +365,41 @@ At first I thought this was just a bug, or a minor problem which could be fixed 
 
 I'll come back to this later...
 
+### ...The fix
+
+I just read this article: http://teropa.info/blog/2014/01/26/the-three-watch-depths-of-angularjs.html
+
+Now I know how to fix the problem with the two datepickers staying in sync, and also why the problem doesn't manifest itself with a single datepicker:
+It just happens that when I wrote the `incDate()` function I had it create a new Date object each time:
+
+```JavaScript
+    $scope.incDate = function() {
+      var t = $scope.dateValue.getTime()
+      t += 24*60*60*1000
+      $scope.dateValue = new Date(t)
+    }
+```
+
+Had I written it like this:
+
+```JavaScript
+    $scope.incDate = function() {
+      var t = $scope.dateValue.getTime()
+      t += 24*60*60*1000
+      $scope.dateValue.setTime(t)
+    }
+```
+
+then clicking the button would not have triggered the watcher, and neither date control would have updated.
+The fix is simply to use a deeper level of watcher - an equality watcher - like this:
+
+```JavaScript
+  scope.$watch('dt', function(newValue) {
+    console.log('dt changed to '+newValue.toDateString())
+    updateElements(newValue)
+  }, true)
+```
+
 ## Step 5 - Quick dates
 
 First, I'm going to implement quick dates outside the directive using a simple controller behaviour.
