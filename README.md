@@ -833,3 +833,13 @@ And here's the code:
   </body>
 </html>
 ```
+
+## Step 9 - A proper implementation of the format attribute
+
+Remember that part of the original spec was that the format attribute could be used to arrange the elements of the datepicker. For example like this:
+
+```HTML
+<div my-datepicker format="MM/yy">
+```
+
+![Screenshot](https://github.com/MEAN-stack/Datepicker/blob/master/date2.png)
