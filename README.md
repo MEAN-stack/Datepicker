@@ -12,11 +12,13 @@ The control doesn't need to be fancy, just configurable, and simple to use.
 And I want to avoid any posible confusion over day/month.
 
 ### Demo
-If you just want to see the end result there is a demo here:
+If you just want to see the end result there are demo pages here:
 
-http://mean-stack.github.io/datepicker/datepicker7.html
+http://mean-stack.github.io/datepicker/datepicker8.html
 
 And the source code is here:
+
+https://github.com/MEAN-stack/MEAN-stack.github.io/blob/master/datepicker/datepicker8.html
 
 
 ## HTML5
@@ -857,3 +859,100 @@ Below, I'll describe the changes I made to achieve this. There is a demo here:
 http://mean-stack.github.io/datepicker/datepicker2.html
 
 First I need to deal with two-digit representation of year. This is a pain to implement and I don't recommend its use. The problem is the ambiguity over the century - does `50` mean `1950` or `2050` or something else? The only reason for supporting this feature is that credit card expiry dates are often shown this way. I have used the convention that 70 .. 99 means 1970 .. 1999, whereas 00 ..69 means 2000 ..2069
+
+Next I need to split out the directive template into its separate elements and write a template function which parses the format string:
+
+```HTML
+  <script type="text/template" id="datepickerDayTemplate">
+    <input ng-model="date.day" class="form-control datepicker" type="text" size="2" maxlength="2">
+  </script>
+  <script type="text/template" id="datepickerMonthTemplate">
+    <select ng-model="date.month" class="form-control datepicker" name="month" ng-options="month as month for month in months"></select>
+  </script>
+  <script type="text/template" id="datepickerYearTemplate">
+    <input ng-model="date.year" class="form-control datepicker" type="text" name="year" size="4" maxlength="4">
+  </script>
+  <script type="text/template" id="datepickerQuickDatesTemplate">
+    <select ng-if="settings.showQuickDates" ng-model="date.quickDateValue" ng-change="change()" class="form-control datepicker" ng-options="date.description for date in quickDates">
+      <option value="">Quick Dates</option>
+    </select>
+  </script>
+```
+
+```JavaScript
+    template: function(elem, attrs) {
+      var dateFormat = 'ddMMyyyy'
+      if (attrs['format']) {
+        if (attrs['format']==='empty') {
+          dateFormat = ""
+        }
+        else {
+          dateFormat = attrs['format']
+       }
+      }
+      var template = ""
+      var showDay = /dd/.test(dateFormat)
+      var showMonth = /MM/.test(dateFormat)
+      var showYear = /yy/.test(dateFormat)
+            
+      // parse the dateFormat string to produce the template
+      var arr = dateFormat.split('')
+      var i = 0
+      var cur = ''
+      var next = ''
+           
+      while (i<arr.length) {
+      cur = arr[i]
+        if (i<arr.length-1) {
+          next = arr[i+1]
+        }
+        else {
+          next = ''
+        }
+        switch (cur) {
+          case 'd':
+            if (next == 'd') {
+              i++
+              while (arr[i+1]=='d') {
+                i++
+              }
+              template += angular.element(document.querySelector("#datepickerDayTemplate")).html().trim()
+            }
+            else {
+              template += 'd'
+            }
+            break;
+          case 'M':
+            if (next == 'M') {
+              i++
+              while (arr[i+1]=='M') {
+                i++
+              }
+              template += angular.element(document.querySelector("#datepickerMonthTemplate")).html().trim()
+            }
+            else {
+              template += 'M'
+            }
+            break;
+          case 'y':
+            if (next == 'y') {
+              i++
+              while (arr[i+1]=='y') {
+                i++
+              }
+              template += angular.element(document.querySelector("#datepickerYearTemplate")).html().trim()
+            }
+            else {
+              template += 'y'
+            }
+            break;
+          default:
+            template += arr[i]
+            break;
+        }
+        i++
+      }
+      template += angular.element(document.querySelector("#datepickerQuickDatesTemplate")).html().trim()
+      return template
+    }
+```
