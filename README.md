@@ -856,7 +856,7 @@ Remember that part of the original spec was that the format attribute could be u
 
 Below, I'll describe the changes I made to achieve this. There is a demo here:
 
-http://mean-stack.github.io/datepicker/datepicker2.html
+http://mean-stack.github.io/datepicker/datepicker8.html
 
 First I need to deal with two-digit representation of year. This is a pain to implement and I don't recommend its use. The problem is the ambiguity over the century - does `50` mean `1950` or `2050` or something else? The only reason for supporting this feature is that credit card expiry dates are often shown this way. I have used the convention that 70 .. 99 means 1970 .. 1999, whereas 00 ..69 means 2000 ..2069
 
