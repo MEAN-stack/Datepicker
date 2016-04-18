@@ -11,6 +11,14 @@ In all cases it should be possible to set min and max allowed dates.
 The control doesn't need to be fancy, just configurable, and simple to use.
 And I want to avoid any posible confusion over day/month.
 
+### Demo
+If you just want to see the end result there is a demo here:
+
+http://mean-stack.github.io/datepicker/datepicker7.html
+
+And the source code is here:
+
+
 ## HTML5
 HTML5 `<input>` element has a `type="date"` attribute.
 It is really nice to use in mobile Safari/Chrome on a handheld device, less usable on desktop Chrome, and not supported at all on IE or Firefox.
@@ -843,3 +851,9 @@ Remember that part of the original spec was that the format attribute could be u
 ```
 
 ![Screenshot](https://github.com/MEAN-stack/Datepicker/blob/master/date2.png)
+
+Below, I'll describe the changes I made to achieve this. There is a demo here:
+
+http://mean-stack.github.io/datepicker/datepicker2.html
+
+First I need to deal with two-digit representation of year. This is a pain to implement and I don't recommend its use. The problem is the ambiguity over the century - does `50` mean `1950` or `2050` or something else? The only reason for supporting this feature is that credit card expiry dates are often shown this way. I have used the convention that 70 .. 99 means 1970 .. 1999, whereas 00 ..69 means 2000 ..2069
