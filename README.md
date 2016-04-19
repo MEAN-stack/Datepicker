@@ -9,6 +9,14 @@
 6. [Quick Dates](#quick-dates)
 7. [Step 1](#step-1---html-and-css)
 8. [Step 2](#step-2---specifying-the-date-format)
+9. [Step 3](#)
+9. [Step 4](#)
+9. [Step 5](#)
+9. [Step 6](#)
+9. [Step 7](#)
+9. [Step 8](#)
+9. [Step 9](#)
+9. [Step 10](#)
 
 ## Introduction
 There are a couple of places in my web application the user needs to enter a date, and optionally, a time.
