@@ -1,9 +1,9 @@
 # Datepicker
 
 ## Table of Contents
-1. [Introduction](#introduction)
-2. [HTML5](#html5)
-3. [Angular UI Bootstrap](#angular-ui-bootstrap)
+[Introduction](#introduction)
+[HTML5](#html5)
+[Angular UI Bootstrap](#angular-ui-bootstrap)
 4. [My datepicker](#my-datepicker)
 5. [input or select?](#inputorselect-)
 6. [Quick Dates](#quick-dates)
