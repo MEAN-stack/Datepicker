@@ -14,7 +14,7 @@
 9. [Step 5](#step-5---quick-dates)
 9. [Step 6](#step-6---transclusion)
 9. [Step 7](#step-7---built-in-quick-dates)
-9. [Step 8](#)
+9. [Step 8](#step-8---two-way-binding-revisited)
 9. [Step 9](#)
 9. [Step 10](#)
 
