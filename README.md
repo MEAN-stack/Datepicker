@@ -8,7 +8,7 @@
 5. [input or select?](#inputorselect-)
 6. [Quick Dates](#quick-dates)
 7. [Step 1](#step-1---html-and-css)
-8. [Step 2](#)
+8. [Step 2](#step-2---specifying-the-date-format)
 
 ## Introduction
 There are a couple of places in my web application the user needs to enter a date, and optionally, a time.
