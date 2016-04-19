@@ -1,9 +1,10 @@
 # Datepicker
 
 ## Table of Contents
-1. [Introduction](#example)
-2. [HTML5](#example2)
-3. [Angular UI Bootstrap](#third-example)
+1. [Introduction](#introduction)
+2. [HTML5](#html5)
+3. [Angular UI Bootstrap](#angular-ui-bootstrap)
+4. [My datepicker](#my-datepicker)
 
 ## Introduction
 There are a couple of places in my web application the user needs to enter a date, and optionally, a time.
