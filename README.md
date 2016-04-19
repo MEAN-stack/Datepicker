@@ -10,13 +10,14 @@
 7. [Step 1](#step-1---html-and-css)
 8. [Step 2](#step-2---specifying-the-date-format)
 9. [Step 3](#step-3---create-the-directive)
-9. [Step 4](#step-4---two-way-binding)
-9. [Step 5](#step-5---quick-dates)
-9. [Step 6](#step-6---transclusion)
-9. [Step 7](#step-7---built-in-quick-dates)
-9. [Step 8](#step-8---two-way-binding-revisited)
-9. [Step 9](#step-9---a-proper-implementation-of-the-format-attribute)
-9. [Step 10](#)
+10. [Step 4](#step-4---two-way-binding)
+11. [Step 5](#step-5---quick-dates)
+12. [Step 6](#step-6---transclusion)
+13. [Step 7](#step-7---built-in-quick-dates)
+14. [Step 8](#step-8---two-way-binding-revisited)
+15. [Step 9](#step-9---a-proper-implementation-of-the-format-attribute)
+16. [Step 10](#step-10---reuse)
+17. [Step 11](#step-11---unit-testing)
 
 ## Introduction
 There are a couple of places in my web application the user needs to enter a date, and optionally, a time.
