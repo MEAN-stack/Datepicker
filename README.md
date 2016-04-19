@@ -1242,9 +1242,13 @@ And here's the HTML which includes the controller:
 </html>
 ```
 
-Step 11 - Unit Testing
+## Step 11 - Unit Testing
 
-The last thing I have to supply a test script. I don't want to discuss the merits of unit testing here - I'll just say that it is only one aspect of testing, which sits alongside scripted end-to-end testing, peer review, manual testing in various web browsers and devices, etc.
+Now that I have my directive in its own JavaScript file, I can move on to the last step - unit testing.
+
+I don't want to discuss the merits of unit testing here - I'll just say that it is only one aspect of testing, which sits alongside scripted end-to-end testing, peer review, manual testing in various web browsers and devices, etc.
+
+I'm using karma as the runner and Jasmine as the framework.
 
 Here's my attempt at unit testing the directive:
 
