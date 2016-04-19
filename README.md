@@ -7,7 +7,8 @@
 4. [My datepicker](#my-datepicker)
 5. [input or select?](#inputorselect-)
 6. [Quick Dates](#quick-dates)
-7. [Step 1](#)
+7. [Step 1](#step-1---html-and-css)
+8. [Step 2](#)
 
 ## Introduction
 There are a couple of places in my web application the user needs to enter a date, and optionally, a time.
