@@ -15,7 +15,7 @@
 9. [Step 6](#step-6---transclusion)
 9. [Step 7](#step-7---built-in-quick-dates)
 9. [Step 8](#step-8---two-way-binding-revisited)
-9. [Step 9](#)
+9. [Step 9](#step-9---a-proper-implementation-of-the-format-attribute)
 9. [Step 10](#)
 
 ## Introduction
