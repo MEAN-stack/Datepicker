@@ -12,7 +12,7 @@
 9. [Step 3](#step-3---create-the-directive)
 9. [Step 4](#step-4---two-way-binding)
 9. [Step 5](#step-5---quick-dates)
-9. [Step 6](#)
+9. [Step 6](#step-6---transclusion)
 9. [Step 7](#)
 9. [Step 8](#)
 9. [Step 9](#)
