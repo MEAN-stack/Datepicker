@@ -9,7 +9,7 @@
 6. [Quick Dates](#quick-dates)
 7. [Step 1](#step-1---html-and-css)
 8. [Step 2](#step-2---specifying-the-date-format)
-9. [Step 3](#)
+9. [Step 3](#step-3---create-the-directive)
 9. [Step 4](#)
 9. [Step 5](#)
 9. [Step 6](#)
