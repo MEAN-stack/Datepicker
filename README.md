@@ -5,6 +5,9 @@
 2. [HTML5](#html5)
 3. [Angular UI Bootstrap](#angular-ui-bootstrap)
 4. [My datepicker](#my-datepicker)
+5. [input or select?](#inputorselect-)
+6. [Quick Dates](#quick-dates)
+7. [Step 1](#)
 
 ## Introduction
 There are a couple of places in my web application the user needs to enter a date, and optionally, a time.
