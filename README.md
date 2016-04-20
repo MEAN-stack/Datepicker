@@ -1350,3 +1350,105 @@ describe("Datepicker directive tests: ", function() {
   })
 })
 ```
+
+## Step 12 - End-to-end testing
+
+Here are some end-to-end tests which I use to test the various interactions between the directive and controller.
+
+To run these tests you would need to set up a webserver to serve angular.js, datepicker.js, and the html page. I have used a local node.js server listening on port 3000.
+
+You will also need to install protractor (the test runner), mocha (the framework), and chai (an assertion library). The steps are something like:
+
+```
+npm install protractor
+./node_modules/.bin/webdriver-manager update
+npm install mocha
+npm install chai
+```
+
+And you'll need a config file for protractor <b>protractor.conf.js</b>:
+
+```JavaScript
+exports.config = {
+  framework: 'mocha',
+  specs: [
+    'test/e2e/**/*.spec.js'
+  ],
+  mochaOpts: {
+    enableTimeouts: false
+  }
+}
+```
+
+Here are the tests:
+```JavaScript
+var expect = require('chai').expect
+
+describe('datepicker', function() {
+  it('initialises the date to today', function() {
+  
+    var today = new Date()
+    var dayVal = "" + today.getDate()
+    
+    browser.get('http://localhost:3000/datepicker9.html')
+    
+    var days = element.all(by.model('date.day'))
+    days.count().then(function(count){
+      expect(count).to.equal(4)
+    })
+    for (var i=0; i<4; i++) {
+      days.get(i).getAttribute('value').then(function(value) {
+        expect(value).to.equal(dayVal)
+      })
+    }
+  })
+  
+  it('increments the date', function() {
+  
+    var now = new Date().getTime()
+    var tomorrow = new Date(now+24*60*60*1000)
+    var dayVal = "" + tomorrow.getDate()
+    
+    browser.get('http://localhost:3000/datepicker9.html')
+    element(by.css('#incDate')).click()
+    
+    var days = element.all(by.model('date.day'))
+    for (var i=0; i<4; i++) {
+      days.get(i).getAttribute('value').then(function(value) {
+        expect(value).to.equal(dayVal)
+      })
+    }
+  })
+  
+  it('selects a quick date', function() {
+  
+    var epoch = new Date(0)
+    var dayVal = "" + epoch.getDate() // '1' obviously!
+    
+    browser.get('http://localhost:3000/datepicker9.html')
+    element.all(by.cssContainingText('option', 'epoch')).first().click();
+    
+    var days = element.all(by.model('date.day'))
+    for (var i=0; i<4; i++) {
+      days.get(i).getAttribute('value').then(function(value) {
+        expect(value).to.equal(dayVal)
+      })
+    }
+  })
+
+  it('changes the day', function() {
+  
+    browser.get('http://localhost:3000/datepicker9.html')
+    var el = element.all(by.model('date.day')).first()
+    var ctrlA = protractor.Key.chord(protractor.Key.CONTROL, "a");
+    el.sendKeys(ctrlA).sendKeys('23')
+    
+    var days = element.all(by.model('date.day'))
+    for (var i=0; i<4; i++) {
+      days.get(i).getAttribute('value').then(function(value) {
+        expect(value).to.equal('23')
+      })
+    }
+  })
+})
+```
