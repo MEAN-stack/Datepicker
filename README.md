@@ -18,6 +18,7 @@
 - [Step 9 - A proper implementation of the format attribute](#step-9---a-proper-implementation-of-the-format-attribute)
 - [Step 10 - Reuse](#step-10---reuse)
 - [Step 11 - Unit testing](#step-11---unit-testing)
+- [Step 12 - End-to-end testing](#- step-12---end-to-end-testing)
 
 ## Introduction
 There are a couple of places in my web application the user needs to enter a date, and optionally, a time.
