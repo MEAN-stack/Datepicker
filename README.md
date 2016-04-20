@@ -1356,7 +1356,7 @@ describe("Datepicker directive tests: ", function() {
 
 Here are some end-to-end tests which I use to test the various interactions between the directive and controller.
 
-To run these tests you would need to set up a webserver to serve angular.js, datepicker.js, and the html page. I have used a local node.js server listening on port 3000.
+To run these tests you would need to set up a webserver to serve angular.js, datepicker.js, and the html page (datepicker9.html). I have used a local node.js server listening on port 3000.
 
 You will also need to install protractor (the test runner), mocha (the framework), and chai (an assertion library). The steps are something like:
 
