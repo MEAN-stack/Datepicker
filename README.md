@@ -21,8 +21,8 @@
 - [Step 12 - End-to-end testing](#step-12---end-to-end-testing)
 
 ## Introduction
-There are a couple of places in my web application the user needs to enter a date, and optionally, a time.
-Use cases are:
+There are a couple of places in my web application where the user needs to enter a date, and optionally, a time.
+Some use cases are:
 
  * Date of birth - time not required, but date could be many years in the past.
  * Card expiry date - only month and year required.
