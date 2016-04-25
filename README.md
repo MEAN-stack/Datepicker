@@ -978,7 +978,36 @@ Next I need to split out the directive template into its separate elements and w
     }
 ```
 
-## Step 10 - Reuse
+## Step 10 - ngModelOptions
+
+I don't know if you have noticed an irritating side-effect of the way the directive watches for changes in the model and updates the date accordingly. For example:
+ - the value in the day input is set to 20 April 2016
+ - the user decides to change the day to 30 April 2016
+ - the user clicks in the element and hits the backspace key
+ - The 0 is deleted and the date changes to 2 April 2016
+ - The user hits the backspace key again
+ - This time the day value becomes invalid and the date is then set to 31 March 2016
+
+What I really need is to tune the way in which Angular does model updates. Thankfully Anular provides a directive <b>nModelOptions</b> for this:
+https://docs.angularjs.org/api/ng/directive/ngModelOptions
+
+The change to the datepicker source is really simple. I just need to add `ng-model-options="{ updateOn: 'blur' }"` to the templates for the day and year inputs:
+
+```HTML
+  <script type="text/template" id="datepickerDayTemplate">
+    <input ng-model="date.day" class="form-control datepicker" type="text" size="2" maxlength="2">
+  </script>
+
+  <script type="text/template" id="datepickerYearTemplate">
+    <input ng-model="date.year" class="form-control datepicker" type="text" name="year" size="4" maxlength="4">
+  </script>
+```
+
+Now that's sorted I can look at date validation.
+
+## Step 11 - Validation
+
+## Step 12 - Reuse
 
 In order to make this control really useful I am going to package it up in a separate file: datepicker.js
 
