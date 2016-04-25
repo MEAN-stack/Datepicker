@@ -1003,6 +1003,9 @@ The change to the datepicker source is really simple. I just need to add `ng-mod
   </script>
 ```
 
+You can see the effect of this change here:
+http://mean-stack.github.io/datepicker/datepicker8fix.html
+
 Now that's sorted I can look at date validation.
 
 ## Step 11 - Validation
