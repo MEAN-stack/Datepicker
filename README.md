@@ -1010,6 +1010,38 @@ Now that's sorted I can look at date validation.
 
 ## Step 11 - Validation
 
+I'll add two attributes - `min-date` and `max-date` each of which will require a JavaScript Date object
+For these attributes, I have to set up two-way bindings between the controller's scope and the directive's scope:
+
+```JavaScript
+...
+  scope: {
+    dt: "=value",
+    quickDates: "=quickDates",
+    dtMin: "=minDate",
+    dtMax: "=maxDate"
+  },
+...
+```
+
+Here's the validation function:
+
+```JavaScript
+  var isValid = function(date) {
+    if (scope.dtMin) {
+      if (date.getTime() < scope.dtMin.getTime()) {
+        return false
+      }
+    }
+    if (scope.dtMax) {
+      if (date.getTime() > scope.dtMax.getTime()) {
+        return false
+      }
+    }
+    return true
+  }
+```
+
 ## Step 12 - Reuse
 
 In order to make this control really useful I am going to package it up in a separate file: datepicker.js
