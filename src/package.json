@@ -7,11 +7,7 @@
 
   "scripts" : {
     "postinstall": "node_modules/.bin/webdriver-manager update",
-    "test" : "node_modules/.bin/karma start --single-run",
-    "unit-test" : "node_modules/.bin/karma start --single-run",
-    "end-to-end-test" : "node_modules/.bin/protractor",
-    "jshint" : "node_modules/.bin/jshint datepicker.js",
-    "linuxtest" : "./node_modules/.bin/jshint datepicker.js && ./node_modules/.bin/karma start --single-run && ./node_modules/.bin/protractor"
+    "test" : "./node_modules/.bin/jshint datepicker.js && ./node_modules/.bin/karma start --single-run && ./node_modules/.bin/protractor"
   },
   
   "dependencies": {},
