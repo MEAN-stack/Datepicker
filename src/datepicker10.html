@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html ng-app="datepickerApp">
+  <head>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.9/angular.js"></script>
+    <script src="datepicker.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.css">
+	<style>
+   	.datepicker {
+	  border-radius:0;
+	  width: auto;
+	  display: inline-block;
+	}
+	</style>
+	<script>
+      angular.module("datepickerApp", ["datepicker"])
+      .controller("datepickerCtrl", function($scope) {
+		$scope.dateValue = new Date()
+        $scope.minDate = new Date()
+        $scope.maxDate = new Date($scope.minDate.getTime() + 365*24*60*60*1000)
+
+        $scope.incDate = function() {
+          $scope.dateValue.setTime($scope.dateValue.getTime() + 24*60*60*1000)
+        }
+
+        $scope.quickDates = [
+          {date: new Date(0), description: 'epoch'},
+          {date: new Date(), description: 'today'},
+          {date: new Date("October 13, 2014 11:13:00"), description: 'October 13, 2014'}
+        ]
+	  })
+	</script>
+  </head>
+  <body ng-controller="datepickerCtrl">
+    <div class="form-group">
+      <label class="col-sm-2 control-label">format=&quot;ddMMyyyy&quot;</label>
+      <div class="col-sm-10">
+        <div my-datepicker format="ddMMyyyy" quick-dates="quickDates" min-date="minDate" max-date="maxDate" value="dateValue" class="form-group" style="font-size: 1.5em;"></div>
+      </div>
+    </div>
+<!--
+    <div class="form-group">
+      <label class="col-sm-2 control-label">format=&quot;ddMMMyyyy&quot;</label>
+      <div class="col-sm-10">
+        <div my-datepicker format="ddMMMyyyy" value="dateValue" class="form-group" style="font-size: 1.5em;"></div>
+      </div>
+    </div>
+    <div class="form-group">
+      <label class="col-sm-2 control-label">format=&quot;ddMMMMyyyy&quot;</label>
+      <div class="col-sm-10">
+        <div my-datepicker format="ddMMMMyyyy" value="dateValue" class="form-group" style="font-size: 1.5em;"></div>
+      </div>
+    </div>
+    <div class="form-group">
+      <label class="col-sm-2 control-label">format=&quot;MM / yy&quot;</label>
+      <div class="col-sm-10">
+        <div my-datepicker format="MM / yy" value="dateValue" class="form-group" style="font-size: 1.5em;"></div>
+      </div>
+    </div>
+    <div class="form-group">
+      <label class="col-sm-2 control-label">format=&quot;yyyy-MM-dd&quot;</label>
+      <div class="col-sm-10">
+        <div my-datepicker format="yyyy-MM-dd" value="dateValue" class="form-group" style="font-size: 1.5em;"></div>
+      </div>
+    </div>
+    <div class="form-group">
+      <label class="col-sm-2 control-label">format=&quot;empty&quot;</label>
+      <div class="col-sm-10">
+        <div my-datepicker format="empty" quick-dates="quickDates" value="dateValue" class="form-group" style="font-size: 1.5em;"></div>
+      </div>
+    </div>
+-->
+    <div style="margin: 20px;">
+	  <span><strong>Selected date:</strong> {{dateValue.toDateString()}}</span>
+	</div>
+    <button id="incDate" class="btn" ng-click="incDate()" style="margin-left: 20px">Date++</button>
+  </body>
+</html>
