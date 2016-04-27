@@ -2,7 +2,7 @@ angular.module("datepickerTemplate", [])
 .run(["$templateCache", function($templateCache) {
   $templateCache.put('dayTemplate', '<input ng-model-options="{ updateOn: \'blur\' }" ng-model="date.day" class="form-control datepicker" type="text" size="2" maxlength="2">')
   $templateCache.put('monthTemplate', '<select ng-model="date.month" class="form-control datepicker" name="month" ng-options="month as month for month in months"></select>')
-  $templateCache.put('yearTemplate', '<input ng-model-options="{ updateOn: \'blur\' }" ng-model="date.year" class="form-control datepicker" type="text" name="year" size="4" maxlength="4">')
+  $templateCache.put('yearTemplate', '<input ng-model-options="{ updateOn: \'blur\' }" input ng-model="date.year" class="form-control datepicker" type="text" name="year" size="4" maxlength="4">')
   $templateCache.put('quickDatesTemplate', '<select ng-if="settings.showQuickDates" ng-model="date.quickDateValue" ng-change="change()" class="form-control datepicker" ng-options="date.description for date in quickDates"><option value="">Quick Dates</option></select>')
 }])
 angular.module("datepicker", ["datepickerTemplate"])
@@ -16,7 +16,7 @@ angular.module("datepicker", ["datepickerTemplate"])
     },
     link: function(scope, element, attrs) {
     
-      var isValid = function(date) {
+      var valid = function(date) {
         if (scope.dtMin) {
           if (date.getTime() < scope.dtMin.getTime()) {
             return false
@@ -86,10 +86,9 @@ angular.module("datepicker", ["datepickerTemplate"])
 
       //watchers
       scope.$watch('date.day', function(newValue, oldValue) {
-      console.log('day changed')
         var d = new Date(scope.dt.getTime())
         d.setDate(newValue)
-        if (isValid(d)) {
+        if (valid(d)) {
           scope.dt.setDate(newValue)
         }
         updateElements(scope.dt)
@@ -103,7 +102,7 @@ angular.module("datepicker", ["datepickerTemplate"])
             d.setMonth(i)
           }
         }
-        if (isValid(d)) {
+        if (valid(d)) {
           scope.dt.setTime(d.getTime())
         }
         updateElements(scope.dt)
@@ -123,7 +122,7 @@ angular.module("datepicker", ["datepickerTemplate"])
         }
         var d = new Date(scope.dt.getTime())
         d.setFullYear(newYear)
-        if (isValid(d)) {
+        if (valid(d)) {
           scope.dt.setFullYear(newYear)
         }
         updateElements(scope.dt)
@@ -131,7 +130,7 @@ angular.module("datepicker", ["datepickerTemplate"])
       })
 			
       scope.$watch('dt', function(newValue, oldValue) {
-        if (!isValid(newValue)) {
+        if (!valid(newValue)) {
           scope.dt.setTime(oldValue.getTime())
         }
         updateElements(newValue)
@@ -140,7 +139,7 @@ angular.module("datepicker", ["datepickerTemplate"])
 
       scope.change = function() {
         if (scope.date.quickDateValue && scope.date.quickDateValue.date) {
-          if (isValid(scope.date.quickDateValue.date)) {
+          if (valid(scope.date.quickDateValue.date)) {
             scope.dt.setTime(scope.date.quickDateValue.date.getTime())
             updateElements(scope.dt)
           }
@@ -157,7 +156,7 @@ angular.module("datepicker", ["datepickerTemplate"])
           dateFormat = attrs['format']
         }
       }
-      var template = ""
+      var template = "<style>.datepicker {border-radius:0; width: auto; display: inline-block;}</style>"
       var showDay = /dd/.test(dateFormat)
       var showMonth = /MM/.test(dateFormat)
       var showYear = /yy/.test(dateFormat)
